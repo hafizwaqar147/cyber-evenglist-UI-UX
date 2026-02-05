@@ -1,4 +1,7 @@
+"use client";
+
 import React from 'react';
+import { motion } from 'framer-motion';
 
 interface ServiceCard {
     id: number;
@@ -30,35 +33,54 @@ const Services = () => {
     ];
 
     return (
-        <section className="w-full bg-gradient-to-br from-[#9333EA] via-[#7C3AED] to-[#6D28D9] py-[80px]">
+        <section className="w-full bg-gradient-to-br from-[#9333EA] via-[#7C3AED] to-[#6D28D9] py-[100px] lg:py-[140px] overflow-hidden">
             <div className="max-w-[1280px] mx-auto px-6">
                 {/* Section Header */}
-                <h2 className="text-[32px] font-bold text-white mb-[48px] text-center">
-                    What would you like to get done?
-                </h2>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-[64px]"
+                >
+                    <h2 className="text-[36px] md:text-[48px] font-bold text-white tracking-tight">
+                        What would you like to get done?
+                    </h2>
+                    <p className="text-purple-100 mt-4 text-[18px] max-w-[600px] mx-auto">
+                        We provide cutting-edge solutions tailored to your specific business needs.
+                    </p>
+                </motion.div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-                    {services.map((service) => (
-                        <div
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-[32px]">
+                    {services.map((service, index) => (
+                        <motion.div
                             key={service.id}
-                            className="bg-white rounded-[16px] p-[32px] flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            whileHover={{ y: -10 }}
+                            className="bg-white rounded-[24px] p-[40px] flex flex-col shadow-xl hover:shadow-2xl transition-all duration-300"
                         >
+                            {/* Card Decoration */}
+                            <div className="w-12 h-1 bg-[#7C3AED] rounded-full mb-6" />
+
                             {/* Card Title */}
-                            <h3 className="text-[18px] font-semibold text-[#111827]">
+                            <h3 className="text-[22px] font-bold text-[#111827]">
                                 {service.title}
                             </h3>
 
                             {/* Card Description */}
-                            <p className="text-[15px] text-[#6B7280] mt-[12px] leading-relaxed flex-grow">
+                            <p className="text-[16px] text-[#6B7280] mt-[16px] leading-relaxed flex-grow">
                                 {service.description}
                             </p>
 
                             {/* Card CTA Button */}
-                            <button className="mt-[24px] px-[20px] py-[12px] bg-[#7C3AED] text-white text-[14px] font-medium rounded-[10px] hover:bg-[#6D28D9] transition-colors duration-200 cursor-pointer shadow-md hover:shadow-lg self-start">
+                            <button className="mt-[32px] px-[24px] py-[14px] bg-[#7C3AED] text-white text-[15px] font-bold rounded-[12px] hover:bg-[#6D28D9] transition-all duration-200 cursor-pointer shadow-lg shadow-purple-100 self-start">
                                 {service.ctaText}
                             </button>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

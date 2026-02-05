@@ -1,5 +1,8 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface Partner {
     id: number;
@@ -81,22 +84,34 @@ const Partnerships = () => {
     };
 
     return (
-        <section className="w-full bg-gradient-to-r from-[#9333EA] to-[#7C3AED] py-[80px]">
+        <section className="w-full bg-[#F9F5FF] py-[80px]">
             <div className="max-w-[1280px] mx-auto px-6">
                 {/* Section Header */}
-                <h2 className="text-[28px] font-bold text-white mb-[40px] text-center">
-                    Our Partnerships
-                </h2>
+                <motion.h2
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-[20px] font-bold text-[#7C3AED] mb-[48px] text-center uppercase tracking-[0.2em]"
+                >
+                    Trusted by Industry Leaders
+                </motion.h2>
 
                 {/* Logos Row */}
-                <div className="flex justify-center items-center gap-[32px] flex-wrap">
-                    {partners.map((partner) => (
-                        <div
+                <div className="flex justify-center items-center gap-[40px] md:gap-[80px] flex-wrap">
+                    {partners.map((partner, index) => (
+                        <motion.div
                             key={partner.id}
-                            className="w-[80px] h-[80px] bg-white rounded-full p-[16px] flex items-center justify-center hover:shadow-xl hover:scale-110 transition-all duration-300 cursor-pointer"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: index * 0.1 }}
+                            whileHover={{ scale: 1.1, y: -5 }}
+                            className="bg-white rounded-2xl p-[20px] flex items-center justify-center shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-purple-50"
                         >
-                            {renderLogo(partner)}
-                        </div>
+                            <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 italic">
+                                {renderLogo(partner)}
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

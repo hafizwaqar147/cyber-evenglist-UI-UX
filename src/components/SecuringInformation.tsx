@@ -1,5 +1,8 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const SecuringInformation = () => {
     const stats = [
@@ -11,56 +14,79 @@ const SecuringInformation = () => {
     ];
 
     return (
-        <section className="w-full bg-gradient-to-r from-[#9333EA] to-[#7C3AED] py-[80px]">
+        <section className="w-full bg-gradient-to-r from-[#9333EA] to-[#7C3AED] py-[100px] lg:py-[140px] overflow-hidden">
             <div className="max-w-[1280px] mx-auto px-6">
                 {/* Main Content - Two Columns */}
-                <div className="flex items-center gap-[48px] mb-[60px]">
+                <div className="flex flex-col lg:flex-row items-center gap-[60px] mb-[80px]">
                     {/* Left Column - Content */}
-                    <div className="flex-1">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="flex-1 text-center lg:text-left"
+                    >
                         {/* Heading */}
-                        <h2 className="text-[36px] font-bold text-white leading-[1.2]">
+                        <h2 className="text-[40px] md:text-[52px] font-bold text-white leading-[1.1] tracking-tight">
                             The ART of Securing Information
                         </h2>
 
                         {/* Supporting Text */}
-                        <p className="text-[16px] font-normal text-[#E9D5FF] mt-[16px] max-w-[480px] leading-relaxed">
+                        <p className="text-[18px] font-normal text-[#E9D5FF] mt-[24px] max-w-[540px] mx-auto lg:mx-0 leading-relaxed">
                             We combine advanced technology, rigorous testing, and expert knowledge
                             to protect your most valuable digital assets. Our comprehensive approach
-                            ensures your information remains secure in an ever-evolving threat landscape.
+                            ensures your information remains secure.
                         </p>
 
                         {/* CTA Button */}
-                        <button className="mt-[24px] px-[24px] py-[12px] bg-[#6D28D9] text-white text-[16px] font-medium rounded-[10px] hover:bg-[#5B21B6] transition-colors duration-200 cursor-pointer shadow-lg hover:shadow-xl">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="mt-[40px] px-[32px] py-[16px] bg-[#6D28D9] text-white text-[16px] font-bold rounded-[14px] hover:bg-[#5B21B6] transition-all duration-200 cursor-pointer shadow-2xl shadow-purple-900"
+                        >
                             Let's work together
-                        </button>
-                    </div>
+                        </motion.button>
+                    </motion.div>
 
                     {/* Right Column - Illustration */}
-                    <div className="flex-1 hidden lg:flex justify-center items-center">
-                        <div className="w-[420px] h-auto">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="flex-1 hidden lg:flex justify-center items-center"
+                    >
+                        <div className="w-[500px] h-auto relative">
                             <Image
                                 src="/cybersecurity-illustration.png"
                                 alt="Cybersecurity illustration"
-                                width={420}
-                                height={420}
-                                className="w-full h-auto"
+                                width={500}
+                                height={500}
+                                className="w-full h-auto drop-shadow-2xl"
                                 priority
                             />
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Bottom Statistics Row */}
-                <div className="flex justify-between items-center gap-8 flex-wrap">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                     {stats.map((stat, index) => (
-                        <div key={index} className="text-center">
-                            <div className="text-[24px] font-bold text-white">
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: 0.2 + (index * 0.1) }}
+                            className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
+                        >
+                            <div className="text-[32px] font-bold text-white">
                                 {stat.number}
                             </div>
-                            <div className="text-[14px] text-[#E9D5FF] mt-1">
+                            <div className="text-[14px] font-medium text-purple-100 mt-2 uppercase tracking-wider">
                                 {stat.label}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
